@@ -1,0 +1,47 @@
+
+30/07/2025
+https://g.co/gemini/share/49ec45e39824 TelasCatalogPage.js (Control de cambio y secuencia N° 001: Implementación CRUD para Catálogo de Telas)
+https://g.co/gemini/share/eae8483a8ded App.js (Corregido 30/07/2025 N° 009: Corrección de SyntaxError en JSX)
+https://g.co/gemini/share/7d07e3dbfab9 App.js (Control de cambio y secuencia N° 008: Corrección de error de sintaxis en Route element)
+https://g.co/gemini/share/7d4a28ad369a App.js (Control de cambio y secuencia N° 009: Corrección de enrutamiento para login inicial)
+https://g.co/gemini/share/f1e972321c0f App.js (Control de cambio y secuencia N° 010: Eliminación de Router interno para corregir useNavigate)
+https://g.co/gemini/share/b0f6eceaff8f index.js (Control de cambio y secuencia N° 001: Inclusión de BrowserRouter)
+https://g.co/gemini/share/13c6b5641715 App.js (Control de cambio y secuencia N° 012: Manejo de estado de carga y redirección inicial)
+
+31/07/2025
+https://g.co/gemini/share/3fb4ceda5b3a DisenosModelosCatalogPage.js (Control de cambio y secuencia N° 001: Creación del componente para el catálogo de Diseños y Modelos)
+https://g.co/gemini/share/62ed2568ae5d App.js (Control de cambio y secuencia N° 009: Adición de la ruta para el Catálogo de Diseños y Modelos)
+https://g.co/gemini/share/b5336bc7edb9 DisenosModelosCatalogPage.js (Control de cambio y secuencia N° 002: Corrección de dependencia en el hook useEffect)
+https://g.co/gemini/share/18deb4810a3d App.js (Control de cambio y secuencia N° 009: Inclusión de la ruta para el catálogo de Diseños y Modelos)
+https://g.co/gemini/share/6e3ade689ab4 App.js (Control de cambio y secuencia N° 009: Inclusión de la ruta para el catálogo de Diseños y Modelos)
+https://g.co/gemini/share/c8929db2c74b App.js (Control de cambio y secuencia N° 010: Aplicación del patrón de ruta simplificado)
+https://g.co/gemini/share/08d288277ab1 App.js (Control de cambio y secuencia N° 010: Aplicación del patrón de ruta simplificado)
+https://g.co/gemini/share/37704d56fe8a DisenosModelosCatalogPage.js (Control de cambio y secuencia N° 002: Implementación CRUD para Catálogo de Modelos y Diseños)
+https://g.co/gemini/share/205036beb981 DisenosModelosCatalogPage.js (Control de cambio y secuencia N° 003: Ajuste para recibir solo userToken)
+https://g.co/gemini/share/714481d475b1 App.js (Control de cambio y secuencia N° 009: Inclusión de nueva ruta y corrección de sintaxis)
+https://g.co/gemini/share/85847a7b5b25 Sidebar.js (Control de cambio y secuencia N° 001: Corrección de error de enrutamiento)
+https://g.co/gemini/share/a0b48c451e4d App.js (Control de cambio y secuencia N° 012: Corrección de errores de importación y enrutamiento)
+https://g.co/gemini/share/c5766b32a4cf ----> Sin comentarios sobre DisenosModelosCatalogPage.js
+ -----> DisenosModelosCatalogPage.js (Control de cambio y secuencia N° 002: Actualización de encabezado)
+https://g.co/gemini/share/abf4efe2e566 TelasCatalogPage.js (Control de cambio y secuencia N° 001: Estandarización de estilo de tabla e inputs)
+
+https://g.co/gemini/share/e2ea1c2c0c13 TelasCatalogPage.js (Control de cambio y secuencia N° 001: Estandarización de estilo de tabla e inputs)
+https://g.co/gemini/share/edc4ff59dd2c TipoCortesCatalogPage.js (Control de cambio y secuencia N° 001: Implementación de CRUD para Catálogo de Tipos de Corte)
+https://g.co/gemini/share/e54c757a27b0 App.js (Control de cambio y secuencia N° 012: Adición de ruta para TipoCortesCatalogPage)
+https://g.co/gemini/share/1c2aff81f29c Sidebar.js (Control de cambio y secuencia N° 002: Adición de enlace para Tipos de Corte)
+https://g.co/gemini/share/32036f2d87c1 TipoCortesCatalogPage.js (Control de cambio y secuencia N° 001: Implementación de CRUD para Catálogo de Tipos de Corte)
+
+01/08/2025
+https://g.co/gemini/share/b7d711b04114 PersonalizacionesCatalogPage.js (Control de cambio y secuencia N° 001: Implementación de CRUD para Catálogo de Personalizaciones)
+https://g.co/gemini/share/cd66b919aa90 PersonalizacionesCatalogPage.js (Control de cambio y secuencia N° 002: Corrección de error de inconsistencia de datos del backend)
+
+02/08/2025
+https://g.co/gemini/share/d98fb20abe42 ClientesCatalogPage.js (Control de cambio y secuencia N° 001: Implementación de CRUD para Catálogo de Clientes)
+https://g.co/gemini/share/066558cc6547 ConfigGlobalCatalogPage.js (Control de cambio y secuencia N° 001: Implementación de CRUD para Catálogo de Configuración Global)
+https://g.co/gemini/share/9e9b2fc19565 AcabadosEspecialesCatalogPage.js (Control de cambio y secuencia N° 001: Implementación de CRUD para Catálogo de Acabados Especiales)
+https://g.co/gemini/share/faacff918f8c UsuariosCatalogPage.js (Control de cambio y secuencia N° 001: Implementación de CRUD para Catálogo de Usuarios)
+https://g.co/gemini/share/315dbaba6356 UsuariosCatalogPage.js (Control de cambio y secuencia N° 002: Implementación de control de acceso por roles)
+https://g.co/gemini/share/69be36cc545a UsuariosCatalogPage.js (Control de cambio y secuencia N° 003: Implementación de CRUD avanzado y reinicio de contraseña por roles)
+https://g.co/gemini/share/f5ef667f3c30 App.js (Control de cambio y secuencia N° 013: Ajuste de enrutamiento para UsuariosCatalogPage)
+https://g.co/gemini/share/061669b8694f App.js (Control de cambio y secuencia N° 014: Corrección de bucle de recarga infinito en PrivateRoute)
+https://g.co/gemini/share/7e7ba8b1a466 UsuariosCatalogPage.js (Control de cambio y secuencia N° 002: Corrección en la función de guardado y recarga de datos)
