@@ -45,10 +45,10 @@ const App = () => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
   const [notification, setNotification] = useState(null);
 
-  // Función para manejar el éxito del login
   const handleLoginSuccess = (token) => {
     setIsAuthenticated(true);
     setUserToken(token);
+    localStorage.setItem('token', token); // Persistencia básica
   };
 
   // Función para manejar el logout
