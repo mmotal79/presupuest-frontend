@@ -1,4 +1,9 @@
+// Autor: Ing. Miguel Mota
+// Fecha de Creación: 2025-08-27 22:56 VET
+// Nombre del Archivo: Header.js (Control de cambio y secuencia N° 002: Nombre de usuario dinámico)
+
 import React from 'react';
+import { useAuth } from './AuthContext'; // Importamos useAuth
 
 /**
  * Componente Header.
@@ -6,7 +11,7 @@ import React from 'react';
  * Este componente representa el encabezado de la aplicación,
  * conteniendo el título de la aplicación y un botón para
  * alternar la visibilidad de la barra lateral en dispositivos móviles.
- * También incluye un espacio para la información del usuario.
+ * También incluye la información del usuario logueado.
  *
  * @param {object} props - Las propiedades del componente.
  * @param {function} props.onToggleSidebar - Función para alternar la visibilidad de la barra lateral.
@@ -14,6 +19,9 @@ import React from 'react';
  * @returns {JSX.Element} El elemento JSX del encabezado.
  */
 function Header({ onToggleSidebar, isSidebarOpen }) {
+  // Usamos el hook useAuth para acceder al estado de autenticación
+  const { currentUserName, isAuthenticated } = useAuth();
+
   return (
     <header className="bg-white shadow p-4 flex justify-between items-center">
       {/* Botón para alternar la barra lateral en pantallas pequeñas */}
@@ -41,10 +49,14 @@ function Header({ onToggleSidebar, isSidebarOpen }) {
       </h1>
 
       {/* Sección de perfil de usuario (visible solo en pantallas medianas y grandes) */}
-      <div className="hidden md:block">
-        <span className="text-gray-600 font-medium">Usuario: Miguel</span>
-        {/* Aquí podrías añadir un icono de usuario o un menú desplegable */}
-      </div>
+      {/* Se asegura de que el usuario esté autenticado antes de mostrar la información */}
+      {isAuthenticated && (
+        <div className="hidden md:block">
+          {/* Se muestra el nombre del usuario logueado */}
+          <span className="text-gray-600 font-medium">Usuario: {currentUserName}</span>
+          {/* Aquí podrías añadir un icono de usuario o un menú desplegable */}
+        </div>
+      )}
     </header>
   );
 }

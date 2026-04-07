@@ -1,1 +1,17 @@
 node_modules/
+
+# Configuración de la App de Firebase (Frontend)
+src/firebase-applet-config.json
+
+# Variables de entorno locales
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Carpeta de compilación (opcional pero recomendado)
+build/
+dist/
+
+

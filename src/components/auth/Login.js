@@ -20,7 +20,7 @@ const Login = () => {
       const data = await login(email, password);
       setNotification({ message: `¡Bienvenido, ${data.user.nombre || data.user.email}!`, type: 'success' });
       // Redirigir según el rol o a un dashboard general
-      if (data.user.rol === 'admin' || data.user.rol === 'gerente' || data.user.rol === 'asesor') {
+      if (data.rol === 'admin' || data.rol === 'gerente' || data.rol === 'asesor') {
         navigate('/dashboard');
       } else {
         // Podrías tener un dashboard diferente para clientes si es necesario

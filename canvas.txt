@@ -45,3 +45,34 @@ https://g.co/gemini/share/69be36cc545a UsuariosCatalogPage.js (Control de cambio
 https://g.co/gemini/share/f5ef667f3c30 App.js (Control de cambio y secuencia N° 013: Ajuste de enrutamiento para UsuariosCatalogPage)
 https://g.co/gemini/share/061669b8694f App.js (Control de cambio y secuencia N° 014: Corrección de bucle de recarga infinito en PrivateRoute)
 https://g.co/gemini/share/7e7ba8b1a466 UsuariosCatalogPage.js (Control de cambio y secuencia N° 002: Corrección en la función de guardado y recarga de datos)
+
+20/08/2025
+https://g.co/gemini/share/59fb88098749 App.js (Control de cambio y secuencia N° 013: Refactorización de la lógica de autenticación con React Context y corrección de login)
+https://g.co/gemini/share/44cbab963f8a App.js (Control de cambio y secuencia N° 015: Separación del AuthContext y corrección de imports)
+https://g.co/gemini/share/ff6528baf98e AuthContext.js (Control de cambio y secuencia N° 001: Creación de AuthContext para centralizar la lógica de autenticación)
+https://g.co/gemini/share/62ee7a078c77 App.js (Control de cambio y secuencia N° 013: Corrección de errores de importación y enrutamiento y advertencia de ESLint)
+https://g.co/gemini/share/9c89441603fb AuthContext.js (Control de cambio y secuencia N° 002: Corrección de advertencias de ESLint)
+https://g.co/gemini/share/9c7bd4349b38 AuthContext.js (Control de cambio y secuencia N° 003: Corrección de errores de exportación)
+https://g.co/gemini/share/8362132309c7 App.js (Control de cambio y secuencia N° 013: Corrección de enrutamiento y renderizado del componente)
+https://g.co/gemini/share/b079ee2da3c0 App.js (Control de cambio y secuencia N° 014: Corrección de advertencias de compilación)
+https://g.co/gemini/share/e5705ce3e302 index.js (Control de cambio y secuencia N° 001: Implementación de React 18 createRoot)
+https://g.co/gemini/share/726d92ca9949 UsuariosCatalogPage.js (Control de cambio y secuencia N° 003: Implementación de lógica de negocio para roles)
+https://g.co/gemini/share/dd5d9e3ba86e UsuariosCatalogPage.js (Control de cambio y secuencia N° 004: Implementación de reseteo de password)
+https://g.co/gemini/share/3c9d4190f137 UsuariosCatalogPage.js (Control de cambio y secuencia N° 005: Corrección de ciclo infinito en useEffect y eslint warnings)
+https://g.co/gemini/share/8e60263c1cbc UsuariosCatalogPage.js (Control de cambio y secuencia N° 004: Implementación de lógica de negocio para roles)
+https://g.co/gemini/share/968cac12b1dd Actualización de userController.js
+https://g.co/gemini/share/a7fc3314de92 Actualización de userRoutes.js
+ 
+27/08/2025
+https://g.co/gemini/share/65b31aed8d99 App.js (Control de cambio y secuencia N° 015: Inclusión de ruta para ConfigGlobalCatalogPage)
+https://g.co/gemini/share/bc747cdaab68 configGlobalController.js (Control de cambio y secuencia N° 001: Implementación de controlador CRUD para Configuración Global)
+https://g.co/gemini/share/c6b9e714ce53 configGlobalRoutes.js (Control de cambio y secuencia N° 001: Implementación de rutas para Configuración Global)
+https://g.co/gemini/share/4703180d39c4 server.js (Control de cambio y secuencia N° 016: Inclusión de rutas para Configuración Global)
+https://g.co/gemini/share/fbc74d431ffc LoginPage.js (Control de cambio y secuencia N° 005: Adaptación a AuthContext)
+https://g.co/gemini/share/ffc306d415bb AuthContext.js (Control de cambio y secuencia N° 003: Mejorado el manejo de errores)
+https://g.co/gemini/share/f9153c5a3fe1 AuthContext.js
+https://g.co/gemini/share/60cf7a1f4c99 App.js (Control de cambio y secuencia N° 016: Corrección de errores de importación y enrutamiento)
+https://g.co/gemini/share/540f39dd4857 Nombre del Archivo: AuthContext.js (Control de cambio y secuencia N° 001: Creación de AuthContext)
+https://g.co/gemini/share/f1f1bbcb66e4 App.js (Control de cambio y secuencia N° 016: Corrección de errores de importación)
+https://g.co/gemini/share/7fcd1b6294c7 App.js (Control de cambio y secuencia N° 017: Corrección de rutas y uso de UsuariosCatalogPage)
+https://g.co/gemini/share/611c7a0cd29d Header.js (Control de cambio y secuencia N° 002: Nombre de usuario dinámico)

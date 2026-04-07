@@ -1,14 +1,15 @@
 // Autor: Ing. Miguel Mota
-// Fecha de Creación: 31/07/2025 08:30
-// Nombre del Archivo: App.js (Control de cambio y secuencia N° 012: Corrección de errores de importación y enrutamiento)
+// Fecha de Creación: 2025-08-20 22:30
+// Nombre del Archivo: App.js (Control de cambio y secuencia N° 014: Corrección de advertencias de compilación)
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import IAAdvisorButton from './components/ia/IAAdvisorButton';
 import Notification from './components/common/Notification';
 import LoginPage from './LoginPage';
+import { useAuth, PrivateRoute } from './AuthContext'; // Importamos useAuth y PrivateRoute
 
 // Importa las páginas existentes
 import DashboardPage from './DashboardPage';
@@ -17,7 +18,6 @@ import BudgetsPage from './BudgetsPage';
 import ReportsPage from './ReportsPage';
 import SettingsPage from './SettingsPage';
 import NotFoundPage from './NotFoundPage';
-import GenericCatalogManager from './GenericCatalogManager';
 
 // Importa las páginas específicas de catálogos
 import TelasCatalogPage from './TelasCatalogPage';
@@ -29,184 +29,68 @@ import ConfigGlobalCatalogPage from './ConfigGlobalCatalogPage';
 import AcabadosEspecialesCatalogPage from './AcabadosEspecialesCatalogPage';
 import UsuariosCatalogPage from './UsuariosCatalogPage';
 
-// Importa las páginas para los sub-ítems de Ajustes
+// Importa las páginas de ajustes
 import UserManagementPage from './UserManagementPage';
 import ChangePasswordPage from './ChangePasswordPage';
 
 /**
  * Componente principal de la aplicación.
- *
- * Configura el enrutamiento, la estructura general (Header, Sidebar)
- * y gestiona los estados globales como las notificaciones y la visibilidad de la barra lateral.
+ * @returns {JSX.Element} El elemento JSX de la aplicación.
  */
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userToken, setUserToken] = useState(null);
-  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
+  const { isAuthenticated, login, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [notification, setNotification] = useState(null);
 
-  const handleLoginSuccess = (token) => {
-    setIsAuthenticated(true);
-    setUserToken(token);
-    localStorage.setItem('token', token); // Persistencia básica
+  const onLogout = () => {
+    logout();
+    navigate('/login');
   };
 
-  // Función para manejar el logout
-  const handleLogout = () => {
-    setIsAuthenticated(false);
-    setUserToken(null);
-    // Limpiar localStorage si se usó
-  };
-
-  const showNotification = (message, type) => {
+  const showNotification = (message, type = 'success') => {
     setNotification({ message, type });
-  };
-
-  /**
-   * Componente auxiliar para rutas privadas.
-   * Se define dentro de App para no necesitar un archivo separado.
-   */
-  const PrivateRoute = ({ children }) => {
-    const navigate = useNavigate();
-    useEffect(() => {
-      if (!isAuthenticated) {
-        navigate('/login');
-      }
-    }, [isAuthenticated, navigate]);
-
-    return isAuthenticated ? children : null;
   };
 
   return (
     <div className="flex h-screen bg-gray-100">
-      {/* Renderiza la barra lateral solo si el usuario está autenticado */}
       {isAuthenticated && (
-        <Sidebar
-          isSidebarOpen={isSidebarVisible}
-          onLogout={handleLogout}
-          toggleSidebar={() => setIsSidebarVisible(!isSidebarVisible)}
-        />
+        <Sidebar isSidebarOpen={isSidebarOpen} onLogout={onLogout} />
       )}
 
-      <main
-        className={`flex-1 flex flex-col transition-all duration-300 ${
-          isAuthenticated && isSidebarVisible ? 'md:ml-64' : 'ml-0'
-        }`}
-      >
-        {/* El Header se renderiza siempre, pero sus elementos internos pueden depender de la autenticación */}
-        <Header
-          isAuthenticated={isAuthenticated}
-          toggleSidebar={() => setIsSidebarVisible(!isSidebarVisible)}
-        />
+      <main className={`flex-1 overflow-x-hidden overflow-y-auto ${isAuthenticated ? 'ml-64' : 'ml-0'} transition-all duration-300 ease-in-out`}>
+        {isAuthenticated && (
+          <Header onMenuClick={toggleSidebar} isSidebarOpen={isSidebarOpen} />
+        )}
 
-        <div className="flex-1 overflow-y-auto p-4">
+        <div className={`p-6 ${isAuthenticated ? 'mt-16' : ''}`}>
           <Routes>
-            {/* Ruta de Login, sin protección */}
+            {/* Ruta para el inicio de sesión */}
             <Route
               path="/login"
-              element={<LoginPage onLoginSuccess={handleLoginSuccess} />}
+              element={<LoginPage onLoginSuccess={login} />}
             />
 
-            {/* Rutas principales de la aplicación, protegidas */}
-            <Route
-              path="/"
-              element={
-                <PrivateRoute>
-                  <DashboardPage />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/transactions"
-              element={
-                <PrivateRoute>
-                  <TransactionsPage />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/budgets"
-              element={
-                <PrivateRoute>
-                  <BudgetsPage />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/reports"
-              element={
-                <PrivateRoute>
-                  <ReportsPage />
-                </PrivateRoute>
-              }
-            />
+            {/* Rutas privadas */}
+            <Route path="/" element={<PrivateRoute><DashboardPage /></PrivateRoute>} />
+            <Route path="/dashboard" element={<PrivateRoute><DashboardPage /></PrivateRoute>} />
+            <Route path="/transactions" element={<PrivateRoute><TransactionsPage /></PrivateRoute>} />
+            <Route path="/budgets" element={<PrivateRoute><BudgetsPage /></PrivateRoute>} />
+            <Route path="/reports" element={<PrivateRoute><ReportsPage /></PrivateRoute>} />
+            
+            {/* Rutas de catálogos */}
+            <Route path="/catalogos/telas" element={<PrivateRoute><TelasCatalogPage userToken={useAuth().userToken} /></PrivateRoute>} />
+            <Route path="/catalogos/disenos-modelos" element={<PrivateRoute><DisenosModelosCatalogPage userToken={useAuth().userToken} /></PrivateRoute>} />
+            <Route path="/catalogos/tipos-corte" element={<PrivateRoute><TipoCortesCatalogPage userToken={useAuth().userToken} /></PrivateRoute>} />
+            <Route path="/catalogos/personalizaciones" element={<PrivateRoute><PersonalizacionesCatalogPage userToken={useAuth().userToken} /></PrivateRoute>} />
+            <Route path="/catalogos/clientes" element={<PrivateRoute><ClientesCatalogPage userToken={useAuth().userToken} /></PrivateRoute>} />
+            <Route path="/catalogos/config-global" element={<PrivateRoute><ConfigGlobalCatalogPage userToken={useAuth().userToken} /></PrivateRoute>} />
+            <Route path="/catalogos/acabados-especiales" element={<PrivateRoute><AcabadosEspecialesCatalogPage userToken={useAuth().userToken} /></PrivateRoute>} />
+			<Route path="/catalogos/usuarios" element={<PrivateRoute><UsuariosCatalogPage userToken={useAuth().userToken} currentUserRole={useAuth().currentUserRole} /></PrivateRoute>
+  }
+/>
 
-            {/* Rutas para los catálogos */}
-            <Route
-              path="/catalogos/telas"
-              element={
-                <PrivateRoute>
-                  <TelasCatalogPage userToken={userToken} />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/catalogos/disenos-modelos"
-              element={
-                <PrivateRoute>
-                  <DisenosModelosCatalogPage userToken={userToken} />
-                </PrivateRoute>
-              }
-            />
-			<Route
-              path="/catalogos/tipos-corte"
-              element={
-                <PrivateRoute>
-                  <TipoCortesCatalogPage userToken={userToken} />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/catalogos/personalizaciones"
-              element={
-                <PrivateRoute>
-                  <PersonalizacionesCatalogPage userToken={userToken} />
-                </PrivateRoute>
-              }
-            />
-			<Route
-              path="/catalogos/clientes"
-              element={
-                <PrivateRoute>
-                  <ClientesCatalogPage userToken={userToken} />
-                </PrivateRoute>
-              }
-            />
-			<Route
-              path="/catalogos/configGlobal"
-              element={
-                <PrivateRoute>
-                  <ConfigGlobalCatalogPage userToken={userToken} />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/catalogos/acabados-especiales"
-              element={
-                <PrivateRoute>
-                  <AcabadosEspecialesCatalogPage userToken={userToken} />
-                </PrivateRoute>
-              }
-            />
-			<Route
-              path="/catalogos/usuarios"
-              element={
-                <PrivateRoute>
-                  <UsuariosCatalogPage userToken={userToken} />
-                </PrivateRoute>
-              }
-            />
-			
             {/* Rutas para los sub-ítems de Ajustes */}
             <Route
               path="/settings/*"
@@ -220,7 +104,7 @@ const App = () => {
               path="/settings/user-management"
               element={
                 <PrivateRoute>
-                  <UserManagementPage userToken={userToken} />
+                  <UserManagementPage userToken={useAuth().userToken} />
                 </PrivateRoute>
               }
             />
@@ -228,7 +112,7 @@ const App = () => {
               path="/settings/change-password"
               element={
                 <PrivateRoute>
-                  <ChangePasswordPage userToken={userToken} />
+                  <ChangePasswordPage userToken={useAuth().userToken} />
                 </PrivateRoute>
               }
             />
