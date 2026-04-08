@@ -1,84 +1,65 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { login as apiLogin } from '../utils/api'; // Import the login function from your API
+import { auth } from './firebase'; // Importamos la configuración que creaste
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 
-const AuthContext = createContext(null);
+const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem('token')); // Try to get the token from localStorage
-  const [isLoading, setIsLoading] = useState(true); // State to handle initial authentication loading
+  const [currentUser, setCurrentUser] = useState(null);
+  const [userToken, setUserToken] = useState(localStorage.getItem('token'));
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Here you can add logic to validate the token when the app loads
-    // For now, we simply set isLoading to false after a small delay
-    // In a real app, you would make a call to your backend to validate the token
-    const checkAuthStatus = async () => {
-      if (token) {
-        // Here you could make an API call to verify if the token is valid
-        // For example: const isValid = await api.validateToken(token);
-        // If valid, you could get user data: const userData = await api.getUserProfile(token);
-        // For now, we assume that if there is a token, the user is "logged in" (for the purpose of this example)
-        try {
-          // Simulate token decoding and user data retrieval
-          // In a real application, this would be a call to your API /api/auth/me or similar
-          const decodedUser = JSON.parse(atob(token.split('.')[1])); // Decode the JWT payload (basic, without signature verification)
-          setUser({ id: decodedUser.id, email: decodedUser.email, rol: decodedUser.rol });
-        } catch (error) {
-          console.error("Error decoding token or invalid token:", error);
-          localStorage.removeItem('token'); // Remove invalid token
-          setToken(null);
-          setUser(null);
-        }
+    // Escuchador en tiempo real de Firebase
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const token = await user.getIdToken();
+        localStorage.setItem('token', token);
+        setUserToken(token);
+        
+        // Aquí simulamos la carga de datos adicionales del backend si fuera necesario
+        setCurrentUser({
+          uid: user.uid,
+          email: user.email,
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+          role: user.email === 'mmotal@gmail.com' ? 'admin' : 'cliente' // Root Admin check
+        });
+      } else {
+        localStorage.removeItem('token');
+        setCurrentUser(null);
+        setUserToken(null);
       }
-      setIsLoading(false); // Initial loading has finished
-    };
+      setLoading(false);
+    });
 
-    checkAuthStatus();
-  }, [token]);
+    return unsubscribe;
+  }, []);
 
-  const login = async (email, password) => {
-    try {
-      const data = await apiLogin(email, password); // Call your API function for login
-      setToken(data.token);
-      localStorage.setItem('token', data.token); // Save the token in localStorage
-      setUser(data.user); // Assume the API returns user data
-      return data; // Return data so the login component can handle it
-    } catch (error) {
-      console.error("Login failed:", error);
-      throw error; // Propagate the error so the login component can handle it
-    }
-  };
-
-  const logout = () => {
-    setToken(null);
-    setUser(null);
-    localStorage.removeItem('token'); // Remove the token from localStorage
-  };
-
-  // Helper function to check roles
-  const hasRequiredRole = (requiredRoles) => {
-    if (!user || !user.rol) return false;
-    if (!requiredRoles || requiredRoles.length === 0) return true; // If no roles are required, any authenticated user passes
-    return requiredRoles.includes(user.rol);
-  };
+  const logout = () => signOut(auth);
 
   const value = {
-    user,
-    token,
-    isLoading,
-    login,
+    currentUser,
+    userToken,
+    isAuthenticated: !!currentUser,
     logout,
-    hasRequiredRole
+    loading
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {!loading && children}
+    </AuthContext.Provider>
+  );
 };
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
+export const useAuth = () => useContext(AuthContext);
+
+// Componente para proteger rutas
+export const PrivateRoute = ({ children }) => {
+  const { isAuthenticated, loading } = useAuth();
+  
+  if (loading) return <div className="p-10 text-center">Cargando seguridad...</div>;
+  
+  return isAuthenticated ? children : <window.location.assign href="/login" />;
 };
- 

@@ -3,7 +3,7 @@
 // Nombre del Archivo: TelasCatalogPage.js (Nuevo 31/07/2025 N° 001: Implementación CRUD para Catálogo de Telas)
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { PlusIcon, PlusCircleIcon, PencilSquareIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/outline'; // Iconos para acciones
+import { PlusCircleIcon, PencilSquareIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/outline'; // Iconos para acciones
 import Modal from './components/common/Modal'; // Asumo que tienes un componente Modal
 import Notification from './components/common/Notification'; // Asumo que tienes un componente Notification
 import ConfirmationModal from './components/common/ConfirmationModal'; // Asumo que tienes un componente ConfirmationModal
