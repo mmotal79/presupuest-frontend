@@ -9,11 +9,14 @@ import IAAdvisorButton from './components/ia/IAAdvisorButton';
 import Notification from './components/common/Notification';
 import { useAuth } from './AuthContext';
 
-// Importa tus páginas
+// --- IMPORTACIONES QUE FALTABAN ---
 import DashboardPage from './DashboardPage';
-// ... (manten todas tus importaciones de páginas igual que antes)
+import TelasCatalogPage from './TelasCatalogPage';
+import DisenosModelosCatalogPage from './DisenosModelosCatalogPage';
+// ----------------------------------
 
 const App = () => {
+  
   const { currentUser, userToken, isAuthenticated } = useAuth();
   const [notification, setNotification] = React.useState(null);
 
